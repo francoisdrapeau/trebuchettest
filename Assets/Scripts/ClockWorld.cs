@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,14 @@ using UnityEngine.Events;
 
 public class ClockWorld : MonoBehaviour
 {
+    [SerializeField] private TimeSource m_timeSource;
+    
     [SerializeField] private GameObject m_clockPrefab;
 
     [SerializeField] private int m_numberOfClocksAtStart = 3;
 
-    private List<GameObject> m_clocks = new List<GameObject>();
-    
+    private List<Clock> m_clocks = new List<Clock>();
+
     public UnityEvent m_audioEvent;
     
     // Start is called before the first frame update
@@ -37,7 +40,7 @@ public class ClockWorld : MonoBehaviour
 
     private void SpawnClock()
     {
-        GameObject newClock = Instantiate(m_clockPrefab);
+        Clock newClock = Instantiate(m_clockPrefab).GetComponent<Clock>();
         newClock.transform.position = new Vector3(m_clocks.Count, 0, 0);
         m_clocks.Add(newClock);
     }
