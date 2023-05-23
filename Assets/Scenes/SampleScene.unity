@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35a29fa6edbf1644a6e87c98207afa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_clockPrefab: {fileID: 4552949824676239662, guid: 3d46747e6c371cb45b6f5368d8d6faeb, type: 3}
+  m_clockPrefab: {fileID: 5800521704497111080, guid: 1eabd087b4d1ea04b8a9e089d5431874, type: 3}
   m_numberOfClocksAtStart: 3
   m_audioEvent:
     m_PersistentCalls:

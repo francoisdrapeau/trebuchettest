@@ -1,31 +1,28 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Clock : MonoBehaviour
 {
-    [SerializeField] private Transform m_bigHand;
-    
-    [SerializeField] private Transform m_smallHand;
+    [SerializeField] private List<HandsSet> m_handsSetPrefabs = new List<HandsSet>();
+
+    [SerializeField] private Transform m_handsSetAnchor;
+
+    private HandsSet m_currentHandsSet;
 
     // Start is called before the first frame update
     void Start()
     {
-        ShowCurrentTime();
+        if (m_handsSetPrefabs.Count > 0)
+        {
+            m_currentHandsSet = Instantiate(m_handsSetPrefabs[Random.Range(0, m_handsSetPrefabs.Count)]);
+            m_currentHandsSet.transform.parent = m_handsSetAnchor;
+            m_currentHandsSet.transform.localPosition = Vector3.zero;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        ShowCurrentTime();
-    }
-
-    private void ShowCurrentTime()
-    {
-        DateTime currentTime = System.DateTime.Now;
-
-        m_bigHand.eulerAngles = new Vector3(0, 0, -currentTime.Minute * 6);
-        m_smallHand.eulerAngles = new Vector3(0, 0, -(currentTime.Hour * 30 + currentTime.Minute * 0.5f));
     }
 }
