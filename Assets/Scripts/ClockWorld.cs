@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ClockWorld : MonoBehaviour
 {
@@ -10,20 +11,34 @@ public class ClockWorld : MonoBehaviour
 
     private List<GameObject> m_clocks = new List<GameObject>();
     
+    public UnityEvent m_audioEvent;
+    
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < m_numberOfClocksAtStart; i++)
         {
-            GameObject newClock = Instantiate(m_clockPrefab);
-            newClock.transform.position = new Vector3(i, 0, 0);
-            m_clocks.Add(newClock);
+            SpawnClock();
         }
+        
+        if (m_audioEvent == null)
+            m_audioEvent = new UnityEvent();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("space"))
+        {
+            SpawnClock();
+            m_audioEvent.Invoke();
+        }
+    }
+
+    private void SpawnClock()
+    {
+        GameObject newClock = Instantiate(m_clockPrefab);
+        newClock.transform.position = new Vector3(m_clocks.Count, 0, 0);
+        m_clocks.Add(newClock);
     }
 }
